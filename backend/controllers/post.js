@@ -7,16 +7,17 @@ const jwt = require('jsonwebtoken');
 
 //créer un post
 exports.createPost = (req, res, next) => {
-    const postObject = JSON.parse(req.body.Post)
-    const post = new Post({
-      ...postObject,
+    const PostObject = JSON.parse(req.body.Post)
+    const Post = new Post({
+      ...PostObject,
     image_url: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    });
-    sequelize.query(`INSERT INTO posts(userId,title,content,image_url) VALUES ('${post.userId}','${post.title}',${post.content}','${post.image_url}')`)
+    })
+    .then(post=>{res.json(post);})
+   /* sequelize.query(`INSERT INTO posts(userId,title,content,image_url) VALUES ('${post.userId}','${post.title}',${post.content}','${post.image_url}')`)
       .then(() => res.status(201).json({ message: 'Post enregistré !'}))
-      .catch(error => res.status(400).json({ error }));
+      .catch(error => res.status(400).json({ error }));*/
   };
-  
+ 
   //modifier un post
   exports.modifyPost = (req, res, next) => {
     const post /*Object*/= req.body
@@ -45,3 +46,4 @@ exports.createPost = (req, res, next) => {
          .then(posts => res.status(200).json(posts))
          .catch(error => res.status(400).json({ error }));
      };
+     
