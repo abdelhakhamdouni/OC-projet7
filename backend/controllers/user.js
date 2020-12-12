@@ -12,16 +12,20 @@ exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
         const user = new User({ 
-          firstname : req.body.firstname,
-          lastname: req.body.lastname,
+          firstName : req.body.firstName,
+          lastName: req.body.lastName,
           email: req.body.email,
           password: hash
         });
-        sequelize.query(`INSERT INTO users(firstname, lastname, email, password) VALUES('${user.firstname}','${user.lastname}','${user.email}','${user.password}')`)
+        sequelize.query(`INSERT INTO users(firstName, lastName, email, password) VALUES('${user.firstName}','${user.lastName}','${user.email}','${user.password}')`)
           .then(() => res.status(201).json({ message: 'Votre compte à bien été créer !' }))
           .catch(error => res.status(400).json({ error }))
 
         })
+        /*user.save()
+                .then(() => res.status(201).json({ message: 'Utilisateur créé'}))
+                .catch(error => res.status(400).json({ error }));
+        })*/
         .catch(error => res.status(500).json({ error }));
 
 };
