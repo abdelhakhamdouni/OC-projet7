@@ -31,13 +31,15 @@ module.exports = {
         onDelete: "CASCADE",
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
-      },
+        defaultValue: Date.now()
+                
+        },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+        defaultValue: Date.now()
+                
+        }
     });
   },
   down: async (queryInterface, Sequelize) => {
