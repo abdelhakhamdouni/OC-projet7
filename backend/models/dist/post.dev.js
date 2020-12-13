@@ -22,18 +22,18 @@ var _require = require('sequelize'),
     Model = _require.Model;
 
 module.exports = function (sequelize, DataTypes) {
-  var Comment =
+  var Post =
   /*#__PURE__*/
   function (_Model) {
-    _inherits(Comment, _Model);
+    _inherits(Post, _Model);
 
-    function Comment() {
-      _classCallCheck(this, Comment);
+    function Post() {
+      _classCallCheck(this, Post);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(Comment).apply(this, arguments));
+      return _possibleConstructorReturn(this, _getPrototypeOf(Post).apply(this, arguments));
     }
 
-    _createClass(Comment, null, [{
+    _createClass(Post, null, [{
       key: "associate",
 
       /**
@@ -43,12 +43,11 @@ module.exports = function (sequelize, DataTypes) {
        */
       value: function associate(models) {
         // define association here
-        models.Comment.belongsTo(models.User, {
-          foreignKey: {
-            allowNull: false
-          }
+        models.Post.hasMany(models.Comment, {
+          onDelete: "CASCADE",
+          hooks: true
         });
-        models.Comment.belongsTo(models.Post, {
+        models.Post.belongsTo(models.User, {
           foreignKey: {
             allowNull: false
           }
@@ -56,17 +55,18 @@ module.exports = function (sequelize, DataTypes) {
       }
     }]);
 
-    return Comment;
+    return Post;
   }(Model);
 
   ;
-  Comment.init({
+  Post.init({
+    title: DataTypes.STRING,
     content: DataTypes.TEXT,
-    postId: DataTypes.INTEGER,
-    usertId: DataTypes.INTEGER
+    imageURL: DataTypes.STRING,
+    userId: DataTypes.INTEGER
   }, {
     sequelize: sequelize,
-    modelName: 'Comment'
+    modelName: 'Post'
   });
-  return Comment;
+  return Post;
 };

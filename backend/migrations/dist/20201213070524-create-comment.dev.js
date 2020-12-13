@@ -7,25 +7,27 @@ module.exports = {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return regeneratorRuntime.awrap(queryInterface.createTable('Posts', {
+            return regeneratorRuntime.awrap(queryInterface.createTable('Comments', {
               id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
               },
-              title: {
-                allowNull: false,
-                type: Sequelize.STRING
-              },
               content: {
+                allowNull: false,
                 type: Sequelize.TEXT
               },
-              imageURL: {
+              postId: {
                 allowNull: false,
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                references: {
+                  model: "Posts",
+                  key: "id"
+                },
+                onDelete: "CASCADE"
               },
-              userId: {
+              usertId: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
                 references: {
@@ -57,7 +59,7 @@ module.exports = {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return regeneratorRuntime.awrap(queryInterface.dropTable('Posts'));
+            return regeneratorRuntime.awrap(queryInterface.dropTable('Comments'));
 
           case 2:
           case "end":
