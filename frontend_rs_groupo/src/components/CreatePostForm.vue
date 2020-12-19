@@ -8,7 +8,7 @@
 
         <div class="form-group">
             <label for="body">Contenu</label>
-            <textarea class="form-control" id="body" v-model="content" rows=5 cols=33 required placeholder="Ecrire un article ou partagez un lien vers un article de votre choix..."></textarea>
+            <textarea class="form-control" id="body" v-model="body" rows=5 cols=33 required placeholder="Ecrire un article ou partagez un lien vers un article de votre choix..."></textarea>
         </div>
 
         <div class="form-group">
@@ -27,7 +27,7 @@ export default {
     name: 'CreatePostForm',
     data () {
         return {
-            id: '',
+            
             title: '',
             body: '',
             image_URL: ''
@@ -38,7 +38,7 @@ export default {
     methods:{
         createPost() {
             let idUser = parseInt(localStorage.getItem("Id"));
-            let dataForm = { id_users: idUser, title: this.title, body: this.body, image_URL: this.imagePath, userId: 0};
+            let dataForm = {id_users: idUser, title: this.title, body: this.body, image_URL: this.image_URL,userId: 0 };
             let jsonDataForm = JSON.stringify(dataForm)
             console.log(dataForm)
             async function postForm(dataToSend) {
