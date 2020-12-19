@@ -21,7 +21,7 @@
             <label for="image_URL">Photo</label>
             <input type="image_URL" class="form-control" id="image_URL" v-model="image_URL" required>
         </div>
-        <button type="submit" class="btnValidation" v-on:click="signUpUser">Inscription</button>
+        <button type="submit" class="btnValidation" v-on:click.prevent="signUpUser">Inscription</button>
     </form>
 </div>
 </template>

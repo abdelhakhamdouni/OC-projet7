@@ -2,14 +2,14 @@
 <div class="formulaire">
     <form class="form">
     <div class="form-group">
-        <label for="email">Adresse mail</label>
+        <label for="email">Adresse email</label>
         <input type="email" class="form-control" id="email" v-model="email" required>
     </div>
     <div class="form-group">
         <label for="password">Mot de passe</label>
         <input type="password" class="form-control" id="password" v-model="password" required>
     </div>
-    <button type="submit" class="btnValidation" v-on:click="loginUser">Connexion</button>
+    <button type="submit" class="btnValidation" v-on:click.prevent="loginUser">Connexion</button>
     </form>
 </div>
 </template>

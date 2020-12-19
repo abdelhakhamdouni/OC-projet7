@@ -8,7 +8,7 @@
 
         <div class="form-group">
             <label for="body">Contenu</label>
-            <textarea class="form-control" id="body" v-model="body" rows=5 cols=33 required placeholder="Ecrire un article ou partagez un lien vers un article de votre choix..."></textarea>
+            <textarea class="form-control" id="body" v-model="content" rows=5 cols=33 required placeholder="Ecrire un article ou partagez un lien vers un article de votre choix..."></textarea>
         </div>
 
         <div class="form-group">
@@ -16,7 +16,7 @@
             <input type="text" class="form-control" id="image_URL" v-model="image_URL" max-length=50 required>
         </div>
 
-        <button type="submit" class="btnValidation" v-on:click="createPost">Partager</button>
+        <button type="submit" class="btnValidation" v-on:click.prevent="createPost">Partager</button>
     </form>
 </div>
 </template>
@@ -31,14 +31,12 @@ export default {
             title: '',
             body: '',
             image_URL: ''
-
         }
     },
-
     methods:{
         createPost() {
             let idUser = parseInt(localStorage.getItem("Id"));
-            let dataForm = {id_users: idUser, title: this.title, body: this.body, image_URL: this.image_URL,userId: 0 };
+            let dataForm = { id_users: idUser, title: this.title, body: this.body, image_URL: this.imagePath, userId: 0};
             let jsonDataForm = JSON.stringify(dataForm)
             console.log(dataForm)
             async function postForm(dataToSend) {
@@ -82,7 +80,6 @@ export default {
 label{
     color:black;
 }
-
  @media all and (max-width: 599px)
   {
       .formulaire{

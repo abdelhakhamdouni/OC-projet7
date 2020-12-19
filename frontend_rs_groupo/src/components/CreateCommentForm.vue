@@ -12,7 +12,7 @@
             <input type="text" class="form-control" id="image_URL" v-model="image_URL" max-length=50 required>
         </div>
 
-        <button type="submit" class="btnValidation" v-on:click="createComment">Partager</button>
+        <button type="submit" class="btnValidation" v-on:click.prevent="createComment">Partager</button>
     </form>
 </div>
 </template>
