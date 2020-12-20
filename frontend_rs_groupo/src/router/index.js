@@ -4,6 +4,7 @@ import HomeSignup from '../views/HomeSignup.vue'
 import HomeLogin from '../views/HomeLogin.vue'
 import UserPostView from '../views/UserPostView.vue'
 import UserCreate from '../views/UserCreate.vue'
+import UserProfil from '../views/UserProfil.vue'
 
 
 Vue.use(VueRouter)
@@ -29,7 +30,13 @@ const routes = [
       name: 'Create',
       component: UserCreate
     
+  },
+  {
+    path: '/profil',
+    name: 'Profil',
+    component: UserProfil
   }
+
   
 ]
 

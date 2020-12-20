@@ -5,9 +5,10 @@
       <router-link to="/signup">Inscription</router-link> |
       <router-link to="/login">Connexion</router-link> |
      </div>
-    <div class="crud" >  
+    <div class="crud">  
         <router-link to="/allpost">Voir tous les posts</router-link> |
         <router-link to="/create">Créer un post</router-link> |
+        <router-link to="/profil">Modification et supression profil</router-link> |
         <a href="#" v-on:click="exitUser">Exit</a> 
     </div> 
       <Header/>

@@ -21,7 +21,7 @@ export default {
 
 <style scoped>
 .headerTitle{
-    background-color: rgb(233, 212, 205);
+    background-color: rgb(200, 193, 224);
 }
 .main-title{
     font-size: 1.5rem;

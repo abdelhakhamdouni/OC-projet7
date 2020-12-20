@@ -6,7 +6,7 @@ const Comment = require('../models/Comment');
 const User = require('../models/User');
 
 // Création de post -- OK
-exports.createPost = (req, res, next) => {
+/*exports.createPost = (req, res, next) => {
   let imagePath = '';
   if (req.file) {
     imagePath = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
@@ -14,16 +14,34 @@ exports.createPost = (req, res, next) => {
     imagePath = '';
   }
   const postObject = {
-    userId: req.body.created_id,
+    id: req.body.id,
     title: req.body.title,
     body: req.body.body,
-    image_URL: imagePath,
+    image_URL: req.body.imagePath,
+    created_date: req.body.created_date
   };
   Post.create(postObject)
     .then(() => res.status(201).json({ message: 'Votre post est bien enregistré!' }))
     .catch((error) => res.status(400).json({ error }));
 };
+*/
 
+exports.createPost  = (req, res, next) => {
+  const postObject = JSON.parse(req.body.post); // on recupere la post
+  delete postObject._id; //L'id de la post est suprimé
+  const post = new Post({ // on créé la nouvelle post
+    ...postObject, /*utilisation de l'opérateur spread ... qui copie tous les éléments de req.body*/
+    
+    id: req.body.id,
+    title: req.body.title,
+    body: req.body.body,
+    image_URL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,//variable pour l'implantation de l'image
+    created_date: req.body.created_date
+  });
+  post.save() // on sauvegarde la nouvelle post 
+    .then(() => res.status(201).json({ message: 'post enregistrée' }))
+    .catch(error => res.status(400).json({ error }));
+};
 // Modification de post -- OK
 exports.modifyPost = (req, res, next) => {
   const postObject = req.file
@@ -119,8 +137,8 @@ exports.getAllPost = (req, res, next) => {
 /*exports.getAllPost = (req, res, next) => {
   User.findOne({ where: { id: req.user_id } })
     .then((user) => {
-      const postLiked = user.post_liked.split(',').map((postID) => parseInt(postID, 10));
-      Post.findAll({ include: [{ model: User, attributes: ['first_name', 'last_name', 'id', 'image_URL'] }], raw: true, nest: true })
+      //const postLiked = user.post_liked.split(',').map((postID) => parseInt(postID, 10));
+      Post.findAll({ include: [{ model: User, attributes: ['id','first_name', 'last_name', 'image_URL', 'created_date'] }], raw: true, nest: true })
         .then((posts) => {
         // const newPosts = posts.map((post) => {
         //   post.user = `${post.user.first_name} ${post.user.last_name}`;

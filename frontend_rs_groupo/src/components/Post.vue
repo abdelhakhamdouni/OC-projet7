@@ -7,7 +7,7 @@
         <p class="titlePost">{{post.title}}</p>
         <p class="bodyPost">{{post.body}}</p>  
         <p class="ImagePost">{{post.image_URL}}</p>
-        <p class="updatedPost" >Date de publication : {{post.updatedAt}}</p>
+        <p class="created_datedPost" >Date de publication : {{post.created_date}}</p>
     </article>
 
     <button class="btnValidation" v-on:click="deletePost" >Supprimer l'article</button>
@@ -20,11 +20,8 @@ export default {
     name: 'Post',
     data () {
         return{
-            id: '',
-            title: '',
-            body:'',
-            image_URL: '',
-            updateAt: ''
+             posts: [],
+             idPost: ''
             }
         },
     mounted(){
@@ -33,6 +30,7 @@ export default {
          
       //Obtenir tous les posts
       fetch("http://localhost:3000/api/post",  {
+          method: 'GET',
              headers: {
                 'authorization': 'bearer ' + localStorage.getItem('token')
             }})

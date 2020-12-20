@@ -24,7 +24,7 @@ export default {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    background-color:  rgb(233, 212, 205);
+    background-color:  rgb(200, 193, 224);
     font-size: 1.5rem;
     
     border: 2px solid black;
