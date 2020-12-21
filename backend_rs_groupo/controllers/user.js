@@ -91,7 +91,8 @@ exports.deleteAccount = (req, res, next) => { //suppression??
     });
 };
 
-exports.userInfo = (req, res, next) => {  //recuperation d'un user specifique
+
+exports.userInfo = (req, res, next) => {  //recuperation d'un user specifique??
   User.findOne({
     where: {
       email: req.params.email,
@@ -111,7 +112,7 @@ exports.userInfo = (req, res, next) => {  //recuperation d'un user specifique
     .catch((error) => res.status(404).json({ error }));
 };
 
-exports.usersInfo = (req, res, next) => {  //recuperation de tous les users
+exports.usersInfo = (req, res, next) => {  //recuperation de tous les users??
   User.findAll()
     .then((users) => {
       res.status(200).json(users);
@@ -119,7 +120,7 @@ exports.usersInfo = (req, res, next) => {  //recuperation de tous les users
     .catch((error) => res.status(404).json({ error }));
 };
 
-exports.changeInfo = (req, res, next) => {
+exports.changeInfo = (req, res, next) => {  //modification info user??
   let imagePath = '';
   if (req.file) {
     imagePath = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
@@ -143,7 +144,7 @@ exports.changeInfo = (req, res, next) => {
 };
 
 
-exports.isAdmin = (req, res, next) => {
+exports.isAdmin = (req, res, next) => {   // moderateur 
   const userObject = {
     isAdmin: req.body.isAdmin,
   };

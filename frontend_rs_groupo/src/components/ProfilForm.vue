@@ -28,7 +28,7 @@ export default {
         const dataForm = JSON.stringify({id: idUser});
         async function postForm(dataForm) {
             try {
-                let response = await fetch("http://localhost:3000/api/auth/:id", {
+                let response = await fetch("http://localhost:3000/api/auth/delete/:id", {
                     method: 'DELETE',
                     headers: {
                         'content-type': 'application/json',
