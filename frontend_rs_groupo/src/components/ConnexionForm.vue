@@ -41,6 +41,7 @@ export default {
                             let responseId = await response.json();
                             localStorage.setItem("Id", responseId.userId);
                             localStorage.setItem("token", responseId.token);
+                             localStorage.setItem("isAdmin", responseId.isAdmin);
                             localStorage.setItem("email", responseId.email);
                             location.replace(location.origin + "/signup#/allpost");
                         } else {

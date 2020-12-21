@@ -3,14 +3,15 @@ const jwt = require('jsonwebtoken'); // Token de protection
 const rateLimit = require('express-rate-limit'); // Protection contre le brute-force
 const User = require('../models/User'); // Chemin d'accès au modèle USER
 
-exports.signup = (req, res, next) => {
+exports.signup = (req, res, next) => { //inscription ok
   console.log(req.body);
   const userData = {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email,
     password: req.body.password,
-    image_URL: 'http://localhost:3000/images/icon-small.png'
+    image_URL: 'http://localhost:3000/images/icon-small.png',
+    isAdmin: 0,
   };
 
   User.findOne({
@@ -39,7 +40,7 @@ exports.signup = (req, res, next) => {
     });
 };
 
-exports.login = (req, res, next) => {
+exports.login = (req, res, next) => {  //connexion ok
   User.findOne({
     where: {
       email: req.body.email,
@@ -64,6 +65,7 @@ exports.login = (req, res, next) => {
             last_name: user.last_name,
             email: user.email,
             image_URL: user.image_URL,
+            isAdmin: user.isAdmin,
             
           });
           console.log(`${user.email} s'est connecté`);
@@ -74,7 +76,7 @@ exports.login = (req, res, next) => {
     });
 };
 
-exports.deleteAccount = (req, res, next) => {
+exports.deleteAccount = (req, res, next) => { //suppression??
   User.destroy({
     where: {
       id: req.params.id,
@@ -89,7 +91,7 @@ exports.deleteAccount = (req, res, next) => {
     });
 };
 
-exports.userInfo = (req, res, next) => {
+exports.userInfo = (req, res, next) => {  //recuperation d'un user specifique
   User.findOne({
     where: {
       email: req.params.email,
@@ -109,7 +111,7 @@ exports.userInfo = (req, res, next) => {
     .catch((error) => res.status(404).json({ error }));
 };
 
-exports.usersInfo = (req, res, next) => {
+exports.usersInfo = (req, res, next) => {  //recuperation de tous les users
   User.findAll()
     .then((users) => {
       res.status(200).json(users);
@@ -140,6 +142,19 @@ exports.changeInfo = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
+
+exports.isAdmin = (req, res, next) => {
+  const userObject = {
+    isAdmin: req.body.isAdmin,
+  };
+  User.update({ ...userObject }, {
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then(() => res.status(200).json({ message: 'Admin accepté' }))
+    .catch((error) => res.status(400).json({ error }));
+};
 
 exports.rateLimit = rateLimit({
   windowMs: 2 * 60 * 1000,

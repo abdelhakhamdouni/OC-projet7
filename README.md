@@ -2,7 +2,7 @@
 Réseau social d'entreprise
 
 .env 
-dbName = rs_groupo
+dbName = rs_groupoma
 dbUser = root
 dbPassword = Rij@34000
 dbHost = localhost

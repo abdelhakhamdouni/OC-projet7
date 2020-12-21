@@ -11,6 +11,6 @@ users.delete('/delete/:id', auth, userCtrl.deleteAccount);
 users.get('/userInfo/:email', auth, userCtrl.userInfo);
 users.get('/usersInfo', auth, userCtrl.usersInfo);
 users.put('/:id', auth, multer, userCtrl.changeInfo);
-
+users.put('/isAdmin/:id', auth, userCtrl.isAdmin);
 
 module.exports = users;

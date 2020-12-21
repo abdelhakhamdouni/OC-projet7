@@ -33,6 +33,10 @@ module.exports = db.sequelize.define(
     image_URL: {
       type: Sequelize.STRING,
       defaultValue: 'http://localhost:3000/images/icon-small.png',
-    }
+    },
+    isAdmin: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
   },
 );
